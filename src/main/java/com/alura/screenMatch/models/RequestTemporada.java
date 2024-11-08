@@ -3,11 +3,10 @@ package com.alura.screenMatch.models;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record RequestSerie(
-        @JsonAlias("Title") String titulo,
-        @JsonAlias("totalSeasons") int totalDeTemporadas,
-        @JsonAlias("imdbRating") String evaluacion
-) {
-
+public record RequestTemporada(
+        @JsonAlias("Season") int numero,
+        @JsonAlias("Episodes")List<RequestEpisodio> episodios
+        ) {
 }

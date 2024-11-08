@@ -1,11 +1,13 @@
 package com.alura.screenMatch;
 
-import com.alura.screenMatch.models.RequestSerie;
-import com.alura.screenMatch.service.ConvertData;
-import com.alura.screenMatch.service.RequestApi;
+
+import com.alura.screenMatch.main.Main;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class ScreenMatchApplication implements CommandLineRunner  {
@@ -16,10 +18,12 @@ public class ScreenMatchApplication implements CommandLineRunner  {
 
 	@Override
 	public void run(String... args) throws Exception {
-		var consumoApi = new RequestApi();
-		var json = consumoApi.obtenerDatos("http://www.omdbapi.com/?t=godzilla&apikey=36e4bf1a");
-		ConvertData convertir = new ConvertData();
-		var datos = convertir.obtenerDatos(json, RequestSerie.class);
-		System.out.println(datos);
+
+		Main main = new Main();
+		main.menu();
+
+
+
+
 	}
 }
