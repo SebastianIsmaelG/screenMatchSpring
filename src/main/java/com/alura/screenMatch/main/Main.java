@@ -1,5 +1,6 @@
 package com.alura.screenMatch.main;
 
+import com.alura.screenMatch.models.RequestEpisodio;
 import com.alura.screenMatch.models.RequestSerie;
 import com.alura.screenMatch.models.RequestTemporada;
 import com.alura.screenMatch.service.ConvertData;
@@ -23,7 +24,7 @@ public class Main {
         var nombreSerie = leer.nextLine();
         var json = consumoApi.obtenerDatos("http://www.omdbapi.com/?t="+nombreSerie.replace(" ", "+")+"&apikey=36e4bf1a");
         var datos = convertir.obtenerDatos(json, RequestSerie.class);
-        System.out.println(datos);
+        //System.out.println(datos);
 
         for (int i = 1; i <= datos.totalDeTemporadas() ; i++) {
             json = consumoApi.obtenerDatos("http://www.omdbapi.com/?t="+nombreSerie.replace(" ", "+")+"&Season="+i+"&apikey=36e4bf1a");
@@ -32,6 +33,14 @@ public class Main {
             temporadas.add(datosTemporadas);
 
         }
-        temporadas.forEach(System.out::println);
+        //temporadas.forEach(System.out::println);
+
+        for (int i = 0; i < datos.totalDeTemporadas() ; i++) {
+            List<RequestEpisodio> episodiosTemporada = temporadas.get(i).episodios();
+            for (int j = 0; j < episodiosTemporada.size() ; j++) {
+                System.out.println(episodiosTemporada.get(j).titulo());
+            }
+        }
+
     }
 }
