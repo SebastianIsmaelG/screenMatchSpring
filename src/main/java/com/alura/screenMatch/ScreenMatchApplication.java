@@ -1,6 +1,7 @@
 package com.alura.screenMatch;
 
 
+import com.alura.screenMatch.main.BusquedaTiempo;
 import com.alura.screenMatch.main.EjemploStreams;
 import com.alura.screenMatch.main.Main;
 import org.springframework.boot.CommandLineRunner;
@@ -22,8 +23,11 @@ public class ScreenMatchApplication implements CommandLineRunner  {
 
 		//Main main = new Main();
 		//main.menu();
-		EjemploStreams ejemploStreams = new EjemploStreams();
-		ejemploStreams.muestraEjemplo();
+
+		BusquedaTiempo main = new BusquedaTiempo();
+		main.menu();
+		//EjemploStreams ejemploStreams = new EjemploStreams();
+		//ejemploStreams.muestraEjemplo();
 
 
 
