@@ -21,11 +21,11 @@ public class ScreenMatchApplication implements CommandLineRunner  {
 	@Override
 	public void run(String... args) throws Exception {
 
-		//Main main = new Main();
-		//main.menu();
-
-		BusquedaTiempo main = new BusquedaTiempo();
+		Main main = new Main();
 		main.menu();
+
+		//BusquedaTiempo main = new BusquedaTiempo();
+		//main.menu();
 		//EjemploStreams ejemploStreams = new EjemploStreams();
 		//ejemploStreams.muestraEjemplo();
 

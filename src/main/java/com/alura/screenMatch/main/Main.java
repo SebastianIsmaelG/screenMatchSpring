@@ -7,10 +7,7 @@ import com.alura.screenMatch.models.RequestTemporada;
 import com.alura.screenMatch.service.ConvertData;
 import com.alura.screenMatch.service.RequestApi;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -47,12 +44,25 @@ public class Main {
 
         List<RequestEpisodio> datosEpisodios = temporadas.stream().flatMap(t -> t.episodios().stream()).collect(Collectors.toList());
 
-        //datosEpisodios.stream().filter(e -> !e.evaluacion().equalsIgnoreCase("N/A")).sorted(Comparator.comparing(RequestEpisodio::evaluacion).reversed()).limit(5).forEach(System.out::println);
+        System.out.println("5 mejores episodios");
+        datosEpisodios.stream().filter(e -> !e.evaluacion().equalsIgnoreCase("N/A")).sorted(Comparator.comparing(RequestEpisodio::evaluacion).reversed()).limit(5).forEach(System.out::println);
 
 
 
         List<Episodio> episodios = temporadas.stream().flatMap(t -> t.episodios().stream().map(d -> new Episodio(t.numero(),d))).collect(Collectors.toList());
         //episodios.forEach(System.out::println);
+
+        //Mapeado y collectors.groupingBy
+        Map<Integer, Double> evalPorTemporada = episodios.stream().filter(e -> e.getEvaluacion() > 0.0).collect(Collectors.groupingBy(
+                Episodio::getNumeroTemporada,Collectors.averagingDouble(Episodio::getEvaluacion)
+        ));
+        System.out.println(evalPorTemporada);
+        //Datos estadisticos del total del stream
+        DoubleSummaryStatistics est = episodios.stream().filter(e -> e.getEvaluacion() > 0.0).collect(Collectors.summarizingDouble(Episodio::getEvaluacion));
+        System.out.println("Media evaluaciones: "+est.getAverage());
+        System.out.println("Episodio peor evaluado: "+est.getMin());
+        System.out.println("Episodio mejor evaluado: "+est.getMax());
+        System.out.println("Suma evaluaciones: "+est.getSum());
 
 
     }

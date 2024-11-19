@@ -45,5 +45,18 @@ public class BusquedaTiempo {
                 "Temporada: " + e.getNumeroTemporada()+", Cantidad de Episodios: "+e.getNumeroEpisodio()+", Fecha de lanzamiento: "+e.getFechaDeLanzamiento().format(formatter)
         ));
 
+        //Optional<Episodio> Episodop = episodios.stream().findFirst(OPTIONAL!);
+
+        /*public Optional<String> getNombre() {
+
+                 // El nombre puede ser null
+                 return Optional.ofNullable(nombre);
+
+                 }
+        optionalNombre.ifPresent(System.out::println); Imprimirá el nombre solo si no es null
+
+        String nombre = optionalNombre.orElse("Nombre no disponible"); // Devolverá "Nombre no disponible" si nombre es null
+        */
+
     }
 }
