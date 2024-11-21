@@ -1,15 +1,25 @@
 package com.alura.screenMatch.models;
 
+import jakarta.persistence.*;
+
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.OptionalDouble;
 
+@Entity
+@Table(name = "Series")
 public class Serie {
-    private String titulo;
-    private int totalDeTemporadas;
-    private String evaluacion;
-    private String poster;
-    private Categoria genero;
-    private String actores;
-    private String sinopsis;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long Id;
+    @Column(unique = true)                                  private String titulo;
+                                                            private int totalDeTemporadas;
+                                                            private String evaluacion;
+                                                            private String poster;
+    @Enumerated(EnumType.STRING)                            private Categoria genero;
+                                                            private String actores;
+                                                            private String sinopsis;
+    @Transient                                              private List<Episodio> episodios;
+    //constructor predeterminado jpa
+    public Serie(){}
 
     public Serie(RequestSerie requestSerie){
         this.titulo = requestSerie.titulo();
@@ -19,6 +29,14 @@ public class Serie {
         this.genero = Categoria.fromString(requestSerie.genero().split(",")[0].trim());
         this.actores = requestSerie.actores();
         this.sinopsis = requestSerie.sinopsis();
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
     }
 
     public String getSinopsis() {

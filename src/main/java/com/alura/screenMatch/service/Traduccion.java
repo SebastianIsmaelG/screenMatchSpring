@@ -4,7 +4,7 @@ import com.theokanning.openai.service.OpenAiService;
 
 public class Traduccion {
     public static String obtenerTraduccion(String texto) {
-        OpenAiService service = new OpenAiService("TU-API-KEY");
+        OpenAiService service = new OpenAiService("API KEY");
 
         CompletionRequest requisicion = CompletionRequest.builder()
                 .model("gpt-3.5-turbo-instruct")

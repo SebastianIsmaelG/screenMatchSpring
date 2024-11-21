@@ -1,6 +1,7 @@
 package com.alura.screenMatch.main;
 
 import com.alura.screenMatch.models.*;
+import com.alura.screenMatch.repository.SerieRepository;
 import com.alura.screenMatch.service.ConvertData;
 import com.alura.screenMatch.service.RequestApi;
 
@@ -17,6 +18,11 @@ public class Main {
 
     private List<RequestTemporada> temporadas = new ArrayList<>();
     private List<RequestSerie> datosSeries = new ArrayList<>();
+    private SerieRepository repositorio;
+
+    public Main(SerieRepository repository) {
+        this.repositorio = repository;
+    }
 
     public void menu(){
 
@@ -81,13 +87,17 @@ public class Main {
     }
     private void buscarSerie() {
         RequestSerie datos = DatosSerie();
-        datosSeries.add(datos);
+        Serie serie = new Serie(datos);
+        repositorio.save(serie);
+        //datosSeries.add(datos);
         System.out.println(datos);
     }
     private void mostrarSeries() {
         //datosSeries.forEach(System.out::println);
-        List<Serie> series = new ArrayList<>();
+        /*List<Serie> series = new ArrayList<>();
         series = datosSeries.stream().map(Serie::new).toList();
+        series.stream().sorted(Comparator.comparing(Serie::getGenero)).forEach(System.out::println); */
+        List<Serie> series = repositorio.findAll(); // entity class jpa
         series.stream().sorted(Comparator.comparing(Serie::getGenero)).forEach(System.out::println);
     }
 
