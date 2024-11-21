@@ -8,5 +8,12 @@ import java.util.List;
 public record RequestTemporada(
         @JsonAlias("Season") int numero,
         @JsonAlias("Episodes")List<RequestEpisodio> episodios
+
+
         ) {
+        @Override
+        public String toString() {
+                return "Temporada " + numero +
+                        " : Lista de Episodios " +"\n"+ episodios;
+        }
 }
