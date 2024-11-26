@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.OptionalDouble;
 
 @Entity
-@Table(name = "Series")
+@Table(name = "series")
 public class Serie {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long Id;
     @Column(unique = true)                                  private String titulo;
@@ -17,7 +17,7 @@ public class Serie {
     @Enumerated(EnumType.STRING)                            private Categoria genero;
                                                             private String actores;
                                                             private String sinopsis;
-    @Transient                                              private List<Episodio> episodios;
+    @OneToMany(mappedBy = "serie")                          private List<Episodio> episodios;
     //constructor predeterminado jpa
     public Serie(){}
 

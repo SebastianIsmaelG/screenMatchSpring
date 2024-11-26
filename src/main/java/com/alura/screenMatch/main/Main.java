@@ -28,6 +28,8 @@ public class Main {
 
 
         var response = true;
+        var numeroIngresado = 0;
+        String option;
 
         while (response){
             System.out.println("""
@@ -39,29 +41,39 @@ public class Main {
                     0- Salir
                     -----------------------------------------
                     """);
-            var option = write.nextInt();
-            write.nextLine();//???
+            option = write.nextLine();
+            //write.nextLine();
 
-            switch (option){
-                case 1:
-                    buscarSerie();
-                    break;
-                case 2:
-                    buscarEpisodio();
-                    break;
-                case 3:
-                    mostrarSeries();
-                    break;
-                case 0:
-                    System.out.println("Saliendo de la aplicacion");
-                    response = false;
-                    break;
-                default:
-                    System.out.println("Opcion invalida");
-                    break;
+            if (option.length() == 1 && Character.isDigit(option.charAt(0))){
+                numeroIngresado = Integer.parseInt(option);
+
+                switch (option){
+                    case "1":
+                        buscarSerie();
+                        break;
+                    case "2":
+                        buscarEpisodio();
+                        break;
+                    case "3":
+                        mostrarSeries();
+                        break;
+                    case "0":
+                        System.out.println("Saliendo de la aplicacion");
+                        response = false;
+                        break;
+                    default:
+                        System.out.println("Opcion invalida");
+                        break;
+                }
+            }else {
+                System.out.println("Ingrese una opcion valida");
+
             }
-        }
 
+
+
+        }
+        write.close();
 
 
     }

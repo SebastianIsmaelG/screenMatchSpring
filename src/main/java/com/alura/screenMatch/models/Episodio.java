@@ -1,15 +1,24 @@
 package com.alura.screenMatch.models;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+@Entity
+@Table(name = "episodios")
 public class Episodio {
-    private Integer numeroTemporada;
-    private String titulo;
-    private Integer numeroEpisodio;
-    private Double evaluacion;
-    private LocalDate fechaDeLanzamiento;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long Id;
+                                                            private Integer numeroTemporada;
+                                                            private String titulo;
+                                                            private Integer numeroEpisodio;
+                                                            private Double evaluacion;
+                                                            private LocalDate fechaDeLanzamiento;
+    @ManyToOne                                              private Serie serie;
 
+    public Episodio(){
+
+    }
     public Episodio(int numero, RequestEpisodio d) {
         this.numeroTemporada = numero;
         this.titulo = d.titulo();
@@ -67,6 +76,13 @@ public class Episodio {
         this.numeroTemporada = numeroTemporada;
     }
 
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
 
     @Override
     public String toString() {
