@@ -17,7 +17,8 @@ public class Serie {
     @Enumerated(EnumType.STRING)                            private Categoria genero;
                                                             private String actores;
                                                             private String sinopsis;
-    @OneToMany(mappedBy = "serie")                          private List<Episodio> episodios;
+    @OneToMany(mappedBy = "serie",
+     cascade = CascadeType.ALL,fetch = FetchType.EAGER)     private List<Episodio> episodios;
     //constructor predeterminado jpa
     public Serie(){}
 
@@ -29,6 +30,15 @@ public class Serie {
         this.genero = Categoria.fromString(requestSerie.genero().split(",")[0].trim());
         this.actores = requestSerie.actores();
         this.sinopsis = requestSerie.sinopsis();
+    }
+
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+        episodios.forEach(e -> e.setSerie(this));
+        this.episodios = episodios;
     }
 
     public Long getId() {
@@ -99,6 +109,7 @@ public class Serie {
     public String toString() {
         return "Datos de la serie "+titulo+ " : Sinopsis = "+sinopsis+"| Total de temporadas = "+totalDeTemporadas+"| Evaluacion = "+evaluacion+
                 "| Genero = "+genero+"| Actores = "+actores+"| Poster = "+poster;
+        //episodios
     }
 }
 
