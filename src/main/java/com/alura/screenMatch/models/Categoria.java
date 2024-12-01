@@ -6,7 +6,8 @@ public enum Categoria {
     COMEDIA("Comedy","Comedia"),
     DRAMA("Drama","Drama"),
     CRIMEN("Crime","Crimen"),
-    TERROR("Terror", "Terror");
+    TERROR("Terror", "Terror"),
+    ANIMACION("Animation","Animation");
 
     private String categoriaOmdb;
     private String categoriaESP;
@@ -23,7 +24,7 @@ public enum Categoria {
                 return categoria;
             }
         }
-        throw new IllegalArgumentException("Ninguna categoria encontrada" +text);
+        throw new IllegalArgumentException("Ninguna categoria encontrada" + text);
     }
     public static Categoria fromESP(String text){
         for (Categoria categoria : Categoria.values()){
