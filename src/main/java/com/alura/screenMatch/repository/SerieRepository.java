@@ -1,5 +1,6 @@
 package com.alura.screenMatch.repository;
 
+import com.alura.screenMatch.dto.EpisodioDTO;
 import com.alura.screenMatch.models.Categoria;
 import com.alura.screenMatch.models.Episodio;
 import com.alura.screenMatch.models.Serie;
@@ -27,4 +28,7 @@ public interface SerieRepository extends JpaRepository<Serie,Long> {
    List<Serie> lanzamientoMasRecientes();
 
    Optional<Serie> findAllById(Long id);
+
+   @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s.id = :id AND e.numeroTemporada= :temporada")
+   List<Episodio> obtenerTemporadasPorNumero(Long id, Long temporada);
 }

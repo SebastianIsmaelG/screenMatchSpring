@@ -1,6 +1,8 @@
 package com.alura.screenMatch.service;
 
+import com.alura.screenMatch.dto.EpisodioDTO;
 import com.alura.screenMatch.dto.SerieDTO;
+import com.alura.screenMatch.models.Categoria;
 import com.alura.screenMatch.models.Serie;
 import com.alura.screenMatch.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +39,24 @@ public class SerieService {
                     s.getPoster(),s.getGenero(),s.getActores(),s.getSinopsis());
         }
         return null;
+    }
+
+    public List<EpisodioDTO> obtenerTemporadas(Long id) {
+        Optional<Serie> serie = repository.findAllById(id);
+        if (serie.isPresent()){
+            Serie s = serie.get();
+            return s.getEpisodios().stream().map(e-> new EpisodioDTO(e.getNumeroTemporada(), e.getTitulo(),e.getNumeroEpisodio())).collect(Collectors.toList());
+        }
+        return null;
+    }
+
+    public List<EpisodioDTO> obtenerTemporadasPorNumero(Long id, Long temporada) {
+        return repository.obtenerTemporadasPorNumero(id,temporada).stream().map(
+                e -> new EpisodioDTO(e.getNumeroTemporada(), e.getTitulo(),e.getNumeroEpisodio())).collect(Collectors.toList());
+    }
+
+    public List<SerieDTO> obtenerSeriesPorCategoria(String nombreGenero) {
+        Categoria categoria = Categoria.fromESP(nombreGenero);
+        return convierteDatos(repository.findByGenero(categoria));
     }
 }

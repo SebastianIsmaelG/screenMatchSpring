@@ -14,7 +14,7 @@ public class Episodio {
                                                             private Integer numeroEpisodio;
                                                             private Double evaluacion;
                                                             private LocalDate fechaDeLanzamiento;
-    @ManyToOne                                              private Serie serie;
+    @ManyToOne @JoinColumn(name = "serie_id")               private Serie serie;
 
     public Episodio(){
 
